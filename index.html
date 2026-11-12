@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saeid Sedaqat · Game Developer</title>
+<meta name="description" content="Browser games by Saeid Sedaqat. Play Era Pop and Garage Legends right here.">
+<meta property="og:title" content="Saeid Sedaqat · Game Developer">
+<meta property="og:description" content="Browser games you can play right in the page.">
+<meta property="og:image" content="https://saeidsedaqat.github.io/img/era-pop.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0d1a;
+  --bg-2: #171428;
+  --card: #1d1932;
+  --line: #2e2850;
+  --text: #f2f0fa;
+  --muted: #a49fbf;
+  --accent: #ffd23f;
+  --accent-ink: #1a1300;
+  --violet: #7b5cff;
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.6 Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* nav */
+nav { position: sticky; top: 0; z-index: 10; background: rgba(15,13,26,.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { font: 700 20px Fredoka, sans-serif; text-decoration: none; letter-spacing: .3px; }
+.brand span { color: var(--accent); }
+nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 15px; }
+nav ul a:hover { color: var(--text); }
+
+/* hero */
+.hero { position: relative; overflow: hidden; padding: 96px 0 80px; }
+.hero::before {
+  content: ""; position: absolute; inset: -40% -10% auto; height: 120%;
+  background: radial-gradient(closest-side, rgba(123,92,255,.35), transparent 70%) 20% 30% / 60% 70% no-repeat,
+              radial-gradient(closest-side, rgba(255,210,63,.18), transparent 70%) 85% 60% / 45% 60% no-repeat;
+  pointer-events: none;
+}
+.hero .wrap { position: relative; }
+.tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: 14px; background: var(--bg-2); }
+h1 { font: 700 clamp(40px, 7vw, 72px)/1.05 Fredoka, sans-serif; margin: 18px 0 16px; }
+h1 em { font-style: normal; color: var(--accent); }
+.lead { max-width: 560px; color: var(--muted); font-size: 18px; margin: 0 0 32px; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 12px 22px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--card); color: var(--text); font: 600 15px Inter, sans-serif; text-decoration: none;
+  transition: transform .15s, background .15s, border-color .15s;
+}
+.btn:hover { transform: translateY(-2px); border-color: #4a4180; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.primary:hover { background: #ffdc66; }
+.btn svg { width: 18px; height: 18px; }
+
+/* sections */
+section { padding: 72px 0; }
+h2 { font: 700 34px Fredoka, sans-serif; margin: 0 0 8px; }
+.sub { color: var(--muted); margin: 0 0 36px; }
+
+/* game cards */
+.games { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+.game { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.game:hover { transform: translateY(-4px); border-color: #4a4180; box-shadow: 0 20px 50px -20px rgba(123,92,255,.45); }
+.cover { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; background: #000; border: 0; padding: 0; width: 100%; display: block; }
+.cover img.bg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.game:hover .cover img.bg { transform: scale(1.04); }
+.cover img.logo { position: absolute; left: 50%; top: 50%; width: 62%; transform: translate(-50%, -50%); filter: drop-shadow(0 8px 18px rgba(0,0,0,.55)); }
+.cover .gl-dim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35)); }
+.play-badge {
+  position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity .2s;
+  background: rgba(10,8,20,.45);
+}
+.play-badge span { width: 72px; height: 72px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+.play-badge svg { width: 30px; height: 30px; margin-left: 4px; fill: var(--accent-ink); }
+.cover:hover .play-badge, .cover:focus-visible .play-badge { opacity: 1; }
+.game .body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.game h3 { font: 700 24px Fredoka, sans-serif; margin: 0; }
+.game p { margin: 0; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 12.5px; padding: 4px 10px; border-radius: 99px; background: var(--bg-2); border: 1px solid var(--line); color: var(--muted); }
+.game .btns { margin-top: auto; padding-top: 6px; }
+.game .btn { padding: 10px 18px; }
+
+/* about */
+.about { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+.about p { color: var(--muted); margin: 0 0 14px; }
+.stack { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.stack h4 { margin: 0 0 14px; font: 600 16px Fredoka, sans-serif; letter-spacing: .4px; color: var(--accent); }
+.stack .chips { gap: 10px; }
+.stack .chip { font-size: 14px; padding: 6px 12px; color: var(--text); }
+
+footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+
+/* player modal */
+.player { position: fixed; inset: 0; z-index: 50; display: none; flex-direction: column; background: rgba(6,5,12,.92); backdrop-filter: blur(6px); }
+.player.open { display: flex; }
+.player-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg-2); }
+.player-bar h3 { font: 700 18px Fredoka, sans-serif; margin: 0 auto 0 0; }
+.icon-btn { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); display: grid; place-items: center; cursor: pointer; text-decoration: none; }
+.icon-btn:hover { border-color: #4a4180; }
+.icon-btn svg { width: 18px; height: 18px; }
+.stage { flex: 1; display: grid; place-items: center; padding: 16px; min-height: 0; }
+.frame-box { position: relative; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6); border: 1px solid var(--line); }
+.frame-box iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 760px) {
+  nav ul { gap: 16px; }
+  .hero { padding: 64px 0 56px; }
+  .about { grid-template-columns: 1fr; }
+  section { padding: 56px 0; }
+  .games { grid-template-columns: 1fr; }
+  .stage { padding: 0; }
+  .frame-box { border-radius: 0; border: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#">Saeid<span>.</span></a>
+    <ul>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/SaeidSedaqat" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">🎮 Indie game developer</span>
+    <h1>Hi, I'm Saeid.<br>I make <em>games</em> for the browser.</h1>
+    <p class="lead">Small, colorful games built with Phaser and JavaScript. Every game below runs right on this page, so click one and play.</p>
+    <div class="btns">
+      <a class="btn primary" href="#games">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Play my games
+      </a>
+      <a class="btn" href="https://github.com/SaeidSedaqat" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<section id="games">
+  <div class="wrap">
+    <h2>Games</h2>
+    <p class="sub">Click a cover to play in the page. Use ⛶ in the player for full screen.</p>
+
+    <div class="games">
+      <article class="game">
+        <button class="cover" data-play="era-pop" aria-label="Play Era Pop">
+          <img class="bg" src="img/era-pop.jpg" alt="Era Pop cover: bubbles holding a wheel, a carriage, a car, a biplane and a rocket">
+          <div class="play-badge"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </button>
+        <div class="body">
+          <h3>Era Pop</h3>
+          <p>A drop-and-merge puzzle through the history of transport. Merge bubbles from the wheel all the way up to the rocket, serve hybrid customers from mixed-up eras, and collect all 42 of them in the Customer Book.</p>
+          <div class="chips"><span class="chip">Merge puzzle</span><span class="chip">Phaser 4</span><span class="chip">Matter.js physics</span><span class="chip">Mobile friendly</span></div>
+          <div class="btns">
+            <button class="btn primary" data-play="era-pop"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button>
+            <a class="btn" href="https://github.com/SaeidSedaqat/era-pop" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="game">
+        <button class="cover" data-play="garage-legends" aria-label="Play Garage Legends">
+          <img class="bg" src="img/garage-bg.jpg" alt="">
+          <div class="gl-dim"></div>
+          <img class="logo" src="img/garage-logo.webp" alt="Garage Legends logo">
+          <div class="play-badge"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </button>
+        <div class="body">
+          <h3>Garage Legends</h3>
+          <p>A cozy idle game with drag racing. Tap your car to earn cash, buy upgrades and new cars, then hit the drag strip and nail your launch and shifts to beat rival racers.</p>
+          <div class="chips"><span class="chip">Idle / clicker</span><span class="chip">Drag racing</span><span class="chip">Phaser 4</span></div>
+          <div class="btns">
+            <button class="btn primary" data-play="garage-legends"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button>
+            <a class="btn" href="https://github.com/SaeidSedaqat/garage-legends" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>About me</h2>
+      <p>I'm Saeid Sedaqat, a game developer who loves making quick-to-learn browser games: merge puzzles, idle games and arcade experiments you can play anywhere without installing anything.</p>
+      <p>I build with JavaScript and Phaser, ship everything on GitHub Pages, and keep iterating on my games in small versioned updates.</p>
+    </div>
+    <div class="stack">
+      <h4>TOOLS I USE</h4>
+      <div class="chips">
+        <span class="chip">JavaScript</span><span class="chip">Phaser</span><span class="chip">Matter.js</span>
+        <span class="chip">HTML / CSS</span><span class="chip">Construct 3</span><span class="chip">Python / Django</span>
+        <span class="chip">Git &amp; GitHub</span><span class="chip">GitHub Actions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Saeid Sedaqat</span>
+    <a href="https://github.com/SaeidSedaqat" target="_blank" rel="noopener">github.com/SaeidSedaqat</a>
+  </div>
+</footer>
+
+<!-- in-page game player -->
+<div class="player" id="player" role="dialog" aria-modal="true" aria-labelledby="player-title">
+  <div class="player-bar">
+    <h3 id="player-title">Game</h3>
+    <button class="icon-btn" id="btn-full" title="Full screen" aria-label="Full screen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    </button>
+    <a class="icon-btn" id="btn-tab" target="_blank" rel="noopener" title="Open in new tab" aria-label="Open in new tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+    </a>
+    <button class="icon-btn" id="btn-close" title="Close (Esc)" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="frame-box" id="frame-box"><div class="loading">Loading game…</div></div>
+  </div>
+</div>
+
+<script>
+const GAMES = {
+  'era-pop':        { title: 'Era Pop',        url: '/era-pop/',        ratio: 16 / 9 },  // responsive; shows its side panel in landscape
+  'garage-legends': { title: 'Garage Legends', url: '/garage-legends/', ratio: 16 / 9 }
+};
+const player = document.getElementById('player');
+const stage = document.getElementById('stage');
+const box = document.getElementById('frame-box');
+const titleEl = document.getElementById('player-title');
+const tabBtn = document.getElementById('btn-tab');
+let current = null, lastFocus = null;
+
+function fit() {
+  if (!current) return;
+  const r = stage.getBoundingClientRect();
+  const pad = window.innerWidth <= 760 ? 0 : 32;
+  const W = r.width - pad, H = r.height - pad;
+  // on small screens just fill the stage; the games are responsive themselves
+  if (window.innerWidth <= 760) { box.style.width = W + 'px'; box.style.height = H + 'px'; return; }
+  let w = W, h = W / current.ratio;
+  if (h > H) { h = H; w = H * current.ratio; }
+  box.style.width = Math.floor(w) + 'px';
+  box.style.height = Math.floor(h) + 'px';
+}
+
+function openGame(id) {
+  current = GAMES[id]; if (!current) return;
+  lastFocus = document.activeElement;
+  titleEl.textContent = current.title;
+  tabBtn.href = current.url;
+  box.innerHTML = '<div class="loading">Loading game…</div>';
+  const f = document.createElement('iframe');
+  f.src = current.url;
+  f.title = current.title;
+  f.allow = 'autoplay; fullscreen; gamepad';
+  f.setAttribute('allowfullscreen', '');
+  f.addEventListener('load', () => { box.querySelector('.loading')?.remove(); f.focus(); });
+  box.appendChild(f);
+  player.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  history.replaceState(null, '', '#play=' + id);
+  fit();
+  document.getElementById('btn-close').focus();
+}
+
+function closeGame() {
+  if (document.fullscreenElement) document.exitFullscreen();
+  player.classList.remove('open');
+  box.innerHTML = ''; // unloads the game so its audio stops
+  current = null;
+  document.body.style.overflow = '';
+  history.replaceState(null, '', location.pathname);
+  lastFocus?.focus();
+}
+
+document.querySelectorAll('[data-play]').forEach(b => b.addEventListener('click', () => openGame(b.dataset.play)));
+document.getElementById('btn-close').addEventListener('click', closeGame);
+document.getElementById('btn-full').addEventListener('click', () => {
+  const f = box.querySelector('iframe'); if (!f) return;
+  (f.requestFullscreen || f.webkitRequestFullscreen)?.call(f);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && current && !document.fullscreenElement) closeGame(); });
+window.addEventListener('resize', fit);
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// deep link: saeidsedaqat.github.io/#play=era-pop
+const m = location.hash.match(/^#play=([\w-]+)/);
+if (m && GAMES[m[1]]) openGame(m[1]);
+</script>
+</body>
+</html>
