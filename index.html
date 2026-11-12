@@ -54,7 +54,7 @@ nav ul a:hover { color: var(--text); }
 }
 .hero .wrap { position: relative; }
 .tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: 14px; background: var(--bg-2); }
-h1 { font: 700 clamp(40px, 7vw, 72px)/1.05 Fredoka, sans-serif; margin: 18px 0 16px; }
+h1 { font: 700 clamp(40px, 7vw, 72px)/1.05 Fredoka, sans-serif; margin: 0 0 32px; }
 h1 em { font-style: normal; color: var(--accent); }
 .lead { max-width: 560px; color: var(--muted); font-size: 18px; margin: 0 0 32px; }
 .btns { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -71,7 +71,7 @@ h1 em { font-style: normal; color: var(--accent); }
 
 /* sections */
 section { padding: 72px 0; }
-h2 { font: 700 34px Fredoka, sans-serif; margin: 0 0 8px; }
+h2 { font: 700 34px Fredoka, sans-serif; margin: 0 0 28px; }
 .sub { color: var(--muted); margin: 0 0 36px; }
 
 /* game cards */
@@ -100,7 +100,7 @@ h2 { font: 700 34px Fredoka, sans-serif; margin: 0 0 8px; }
 
 /* about */
 .about { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
-.about p { color: var(--muted); margin: 0 0 14px; }
+.about p, #about p { color: var(--muted); margin: 0; max-width: 680px; font-size: 18px; }
 .stack { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
 .stack h4 { margin: 0 0 14px; font: 600 16px Fredoka, sans-serif; letter-spacing: .4px; color: var(--accent); }
 .stack .chips { gap: 10px; }
@@ -135,30 +135,13 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a class="brand" href="#">Saeid<span>.</span></a>
-    <ul>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="https://github.com/SaeidSedaqat" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-  </div>
-</nav>
-
 <header class="hero">
   <div class="wrap">
-    <span class="tag">🎮 Indie game developer</span>
-    <h1>Hi, I'm Saeid.<br>I make <em>games</em> for the browser.</h1>
-    <p class="lead">Small, colorful games built with Phaser and JavaScript. Every game below runs right on this page, so click one and play.</p>
+    <h1>Hi, I'm Saeid,<br>I make <em>games</em> :)</h1>
     <div class="btns">
       <a class="btn primary" href="#games">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         Play my games
-      </a>
-      <a class="btn" href="https://github.com/SaeidSedaqat" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
-        GitHub
       </a>
     </div>
   </div>
@@ -167,7 +150,6 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space
 <section id="games">
   <div class="wrap">
     <h2>Games</h2>
-    <p class="sub">Click a cover to play in the page. Use ⛶ in the player for full screen.</p>
 
     <div class="games">
       <article class="game">
@@ -177,11 +159,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space
         </button>
         <div class="body">
           <h3>Era Pop</h3>
-          <p>A drop-and-merge puzzle through the history of transport. Merge bubbles from the wheel all the way up to the rocket, serve hybrid customers from mixed-up eras, and collect all 42 of them in the Customer Book.</p>
-          <div class="chips"><span class="chip">Merge puzzle</span><span class="chip">Phaser 4</span><span class="chip">Matter.js physics</span><span class="chip">Mobile friendly</span></div>
+          <p>Merge bubbles through the history of transport, from the wheel to the rocket, and serve customers from mixed-up eras.</p>
           <div class="btns">
             <button class="btn primary" data-play="era-pop"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button>
-            <a class="btn" href="https://github.com/SaeidSedaqat/era-pop" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </article>
@@ -195,11 +175,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space
         </button>
         <div class="body">
           <h3>Garage Legends</h3>
-          <p>A cozy idle game with drag racing. Tap your car to earn cash, buy upgrades and new cars, then hit the drag strip and nail your launch and shifts to beat rival racers.</p>
-          <div class="chips"><span class="chip">Idle / clicker</span><span class="chip">Drag racing</span><span class="chip">Phaser 4</span></div>
+          <p>Earn cash in your garage, upgrade your cars, then hit the drag strip and beat rival racers.</p>
           <div class="btns">
             <button class="btn primary" data-play="garage-legends"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button>
-            <a class="btn" href="https://github.com/SaeidSedaqat/garage-legends" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </article>
@@ -208,19 +186,10 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space
 </section>
 
 <section id="about">
-  <div class="wrap about">
+  <div class="wrap">
     <div>
       <h2>About me</h2>
-      <p>I'm Saeid Sedaqat, a game developer who loves making quick-to-learn browser games: merge puzzles, idle games and arcade experiments you can play anywhere without installing anything.</p>
-      <p>I build with JavaScript and Phaser, ship everything on GitHub Pages, and keep iterating on my games in small versioned updates.</p>
-    </div>
-    <div class="stack">
-      <h4>TOOLS I USE</h4>
-      <div class="chips">
-        <span class="chip">JavaScript</span><span class="chip">Phaser</span><span class="chip">Matter.js</span>
-        <span class="chip">HTML / CSS</span><span class="chip">Construct 3</span><span class="chip">Python / Django</span>
-        <span class="chip">Git &amp; GitHub</span><span class="chip">GitHub Actions</span>
-      </div>
+      <p>I'm Saeid Sedaqat. I've loved playing video games ever since I first held a PS1 controller in my hands and discovered their magic, so I became a game developer to make some magic of my own.</p>
     </div>
   </div>
 </section>
